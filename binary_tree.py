@@ -57,3 +57,30 @@ class Solution:
                     path.append(current)
 
         return results
+
+    def postorder_traversal_iterative(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        if not root:
+            return []
+
+        results = []
+        path = [root]
+
+        while path:
+            current = path.pop()
+            if current.left is None and current.right is None:
+                results.append(current.val)
+                continue
+
+            path.append(current)
+            if current.right is not None:
+                path.append(current.right)
+                current.right = None
+            if current.left is not None:
+                path.append(current.left)
+                current.left = None
+
+        return results
