@@ -1,3 +1,5 @@
+from collections import deque
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, x):
@@ -25,6 +27,27 @@ class Solution:
                 path.append(current.right)
             if current.left is not None:
                 path.append(current.left)
+
+        return results
+
+    def preorder_traversal_recursive(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        if not root:
+            return []
+
+        results = []
+
+        def preorder(node, results):
+            results.append(node.val)
+            if node.left is not None:
+                preorder(node.left, results)
+            if node.right is not None:
+                preorder(node.right, results)
+
+        preorder(root, results)
 
         return results
 
@@ -82,5 +105,34 @@ class Solution:
             if current.left is not None:
                 path.append(current.left)
                 current.left = None
+
+        return results
+
+    def levelOrder_traversal_iterative(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        if not root:
+            return []
+
+        results = []
+        path = [[root]]
+
+        while path:
+            temp_out = []
+            candidates = []
+
+            current = path.pop()
+            for item in current:
+                temp_out.append(item.val)
+                if item.left is not None:
+                    candidates.append(item.left)
+                if item.right is not None:
+                    candidates.append(item.right)
+            if temp_out:
+                results.append(temp_out)
+            if candidates:
+                path.append(candidates)
 
         return results
