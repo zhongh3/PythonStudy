@@ -81,6 +81,27 @@ class Solution:
 
         return results
 
+    def inorder_traversal_recursive(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+
+        def inorder(node, results):
+            if node.left:
+                inorder(node.left, results)
+            results.append(node.val)
+            if node.right:
+                inorder(node.right, results)
+
+        if not root:
+            return []
+
+        results = []
+        inorder(root, results)
+
+        return results
+
     def postorder_traversal_iterative(self, root):
         """
         :type root: TreeNode
