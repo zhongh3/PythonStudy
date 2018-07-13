@@ -129,6 +129,27 @@ class Solution:
 
         return results
 
+    def postorder_traversal_recursive(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+
+        def postorder(node, results):
+            if node.left:
+                postorder(node.left, results)
+            if node.right:
+                postorder(node.right, results)
+            results.append(node.val)
+
+        if not root:
+            return []
+
+        results = []
+        postorder(root, results)
+
+        return results
+
     def levelOrder_traversal_iterative(self, root):
         """
         :type root: TreeNode
