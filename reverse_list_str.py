@@ -37,6 +37,15 @@ def rev_list3(lst):
     return rev_list_helper3(0)
 
 
+def rev_list4(lst):  # iterative solution
+    accumulator = []
+
+    for x in lst:
+        accumulator = [x] + accumulator
+
+    return accumulator
+
+
 def rev_str(s):
     if not s:  # equivalent to s == ""
         return s
