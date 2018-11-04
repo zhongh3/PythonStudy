@@ -3,9 +3,9 @@ import ast
 debugging = True
 
 
-def process_input():
+def process_input(filename):
     # filename = input("please enter input filename: ")
-    filename = "./webpage.html"
+    # filename = "./webpage.html"
 
     file = open(filename, mode="r", encoding='UTF-8')
 
@@ -37,5 +37,32 @@ def process_input():
         raise Exception("Can't fine the string - \'\"pages\":[\'")
 
 
+def get_cid_by_page_num(pages, page_num):
+    for page in pages:
+        if page.get("page") == page_num:
+            if debugging:
+                print("page = {}, cid = {}, title = {}".format(
+                    page.get("page"), page.get("cid"), page.get("part")
+                ))
+
+            # both cid and title should be returned as string
+            return str(page.get("cid")), page.get("part")
+
+
+def get_cid_and_title(filename, page_num):
+    pages = process_input(filename)
+    return get_cid_by_page_num(pages, page_num)
+
+
+def get_total_page_num(filename):
+    x = len(process_input(filename))
+    print("Total page number = {}".format(x))
+    return x
+
+
 if __name__ == "__main__":
-    pages = process_input()
+    filename = "./webpage.html"
+    page_num = 11
+
+    get_cid_and_title(filename, page_num)
+    get_total_page_num(filename)
