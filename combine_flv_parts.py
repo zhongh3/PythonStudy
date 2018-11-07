@@ -1,6 +1,8 @@
-import os, subprocess
+import os
+import subprocess
 
 # script to combine parts of *.flv files downloaded from bilibili.com using ffmpeg
+
 
 # original file name:
 # e.g. 【不忘初心字幕组】【全场中字】2015.12.06 AKB48剧场Open10周年纪念祭 渡边麻友-8985561_part1.flv
@@ -23,6 +25,7 @@ def rename(path):
         return False
 
     return True
+
 
 # To generate inputs.txt for ffmpeg in the format:
 # file '1.flv'
