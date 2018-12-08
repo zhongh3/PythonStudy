@@ -1,4 +1,5 @@
 # Implementation of different sorting algorithms
+import random
 
 
 #######################################
@@ -62,7 +63,7 @@ def merge_sort(seq):
 
 
 def main():
-    inputs = [3, 2, 5, 1, 9]
+    inputs = random.sample(range(10), 10)
     print("Before Sorting: {}".format(inputs))
 
     # select_sort(inputs)
