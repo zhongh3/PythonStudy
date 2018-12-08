@@ -62,15 +62,67 @@ def merge_sort(seq):
     merge_sort_recursive(seq, 0, len(seq))
 
 
+#######################################
+# 3. Quicksort - O(nlogn)
+#######################################
+# divide and conquer -- recursive (usually)
+def quicksort(seq):
+    def partition(seq, start, stop):
+        pivot_idx = start
+        pivot = seq[pivot_idx]
+        i = start + 1
+        j = stop - 1
+
+        while i <= j:
+            while i <= j and seq[i] <=  pivot:
+                i += 1
+            while i <= j and pivot < seq[j]:
+                j -= 1
+
+            # swap
+            if i < j:
+                tmp = seq[i]
+                seq[i] = seq[j]
+                seq[j] = tmp
+                i += 1
+                j -= 1
+
+        seq[pivot_idx] = seq[j]
+        seq[j] = pivot
+
+        return j
+
+    def quicksort_recursive(seq, start, stop):
+        if start >= stop - 1:  # empty sequence: start > stop - 1; others: start == stop - 1
+            return
+
+        pivot_idx = partition(seq, start, stop)
+
+        quicksort_recursive(seq, start, pivot_idx)
+        quicksort_recursive(seq, pivot_idx + 1, stop)
+
+    # randomize the sequence to guarantee a random choice of the pivot
+    random.shuffle(seq)
+
+    print("After Randomization: {}".format(seq))
+
+    quicksort_recursive(seq, 0, len(seq))
+
+
 def main():
+    random.seed(1)
     inputs = random.sample(range(10), 10)
+    # inputs = [1, 2, 3, 4, 5]
     print("Before Sorting: {}".format(inputs))
 
     # select_sort(inputs)
     # print("After Selection Sort: {}".format(inputs))
 
-    merge_sort(inputs)
-    print("After Merge Sort: {}".format(inputs))
+    # merge_sort(inputs)
+    # print("After Merge Sort: {}".format(inputs))
+
+    quicksort(inputs)
+    print("After Quicksort: {}".format(inputs))
 
 
 if __name__ == "__main__":
